@@ -1,0 +1,23 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "edge": "100",
+          "firefox": "100",
+          "chrome": "20", // 修改支持的目标浏览器的版本高低，可以控制语法是否被转换
+          "safari": "14"
+        },
+        // 处理ES6新增的API，Polyfill方案core-js（结合配置项useBuiltIns）
+        "useBuiltIns": "usage", // "usage" | "entry" | false, defaults to false
+        "corejs": {
+          // 配置使用哪个版本的core-js,若不配置则默认使用2.0版本
+          "version": "3.26.0",
+          "proposals": true // 是否包含提案阶段的API
+        }
+      }
+    ]
+  ],
+  "plugins": ["@babel/plugin-transform-runtime"] // 移除@babel/preset-env注入的辅助函数，将其替换为@babel/runtime/helpers中函数的引用，这个包里面有@babel/runtime（辅助函数的集合包）依赖
+}
